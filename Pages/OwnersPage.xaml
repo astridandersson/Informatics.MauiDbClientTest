@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Informatics.MauiDbClientTest.Pages.OwnersPage"
+             Title="Owners">
+    <StackLayout>
+        <!-- 'Add' button at the top -->
+        <Button Text="Add Owner"
+                Command="{Binding OpenAddOwnerCommand}"
+                Margin="10"
+                HorizontalOptions="Fill" />
+        <!-- CollectionView for displaying the list of owners -->
+        <CollectionView x:Name="OwnersList"
+                        ItemsSource="{Binding Owners}"
+                        SelectionMode="Single"
+                        VerticalOptions="FillAndExpand"
+                        ItemsUpdatingScrollMode="KeepItemsInView">
+            <!-- Template for each owner item -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                        <!-- Owner name -->
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="{Binding OwnerName}"
+                               FontAttributes="Bold"
+                               AutomationId="OwnerName" />
+                        <!-- Owner phone number -->
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="{Binding OwnerPhoneNumber}"
+                               AutomationId="OwnerPhoneNumber" />
+                        <!-- Owner email -->
+                        <Label Grid.Row="2" Grid.Column="0"
+                               Text="{Binding OwnerEmail}"
+                               AutomationId="OwnerEmail" />
+                        <!-- Owner address -->
+                        <Label Grid.Row="3" Grid.Column="0"
+                               Text="{Binding OwnerAddress}"
+                               AutomationId="OwnerAddress" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenOwnerDetailsCommand, Source={x:Reference OwnersList}}"
+                                                  CommandParameter="{Binding OwnerId}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <!-- Empty view for when there are no owners -->
+            <CollectionView.EmptyView>
+                <Label Text="No owners found."
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

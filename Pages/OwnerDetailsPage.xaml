@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Informatics.MauiDbClientTest.Pages.OwnerDetailsPage"
+             Title="Owner Details">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Frame CornerRadius="10" Padding="15" HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Id:" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Owner.OwnerId, Mode=TwoWay}" Placeholder="Owner Id"/>
+                    <Label Text="Name:" FontAttributes="Bold"/>
+                    
+                    <Entry Text="{Binding Owner.OwnerName, Mode=TwoWay}" Placeholder="Owner Name"/>
+                    <Label Text="Phone Number:" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Owner.OwnerPhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"/>
+                    <Label Text="Email:" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Owner.OwnerEmail, Mode=TwoWay}" Placeholder="Email"/>
+                    <Label Text="Address:" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Owner.OwnerAddress, Mode=TwoWay}" Placeholder="Address"/>
+
+                    
+                    
+                </VerticalStackLayout>
+            </Frame>
+            <Button Text="Save Changes" Command="{Binding SaveOwnerCommand}" CornerRadius="5" />
+            <Button Text="Delete" Command="{Binding DeleteOwnerCommand}" CornerRadius="5" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

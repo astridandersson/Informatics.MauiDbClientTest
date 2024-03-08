@@ -19,8 +19,26 @@
                     <Entry Text="{Binding Pet.PetAge, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Pet Age"/>
                     <Label Text="Owner:" FontAttributes="Bold"/>
                     <!-- Assuming you have a ViewModel property for the selected owner -->
-                    <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" IsReadOnly="True"/>
-                    <Button Text="Select Owner" Command="{Binding SelectOwnerCommand}" CornerRadius="5"/>
+                     <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" IsReadOnly="True"/> 
+
+                   <!-- <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" Placeholder="Owner Id"/> -->
+
+                        <CollectionView x:Name="OwnerSelector"
+                        ItemsSource="{Binding Owners}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding Pet.Owner, Mode=TwoWay}"
+                        HeightRequest="150">
+                        <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                        <Grid Padding="10">
+                        <Label Text="{Binding OwnerId}"/>
+                        </Grid>
+                        </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+
+                  <!--  <Button Text="Select Owner" Command="{Binding SelectOwnerCommand}" CornerRadius="5"/> -->
                 </VerticalStackLayout>
             </Frame>
             <Button Text="Save Changes" Command="{Binding SavePetCommand}" CornerRadius="5" />

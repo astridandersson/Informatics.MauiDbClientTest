@@ -19,8 +19,7 @@
                     <Label Text="Address:" FontAttributes="Bold"/>
                     <Entry Text="{Binding Owner.OwnerAddress, Mode=TwoWay}" Placeholder="Address"/>
 
-                    
-                    
+                        
                 </VerticalStackLayout>
             </Frame>
             <Button Text="Save Changes" Command="{Binding SaveOwnerCommand}" CornerRadius="5" />

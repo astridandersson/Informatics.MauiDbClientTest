@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class=" Informatics.MauiDbClientTest.Pages.PetsPage"
+             x:Class="Informatics.MauiDbClientTest.Pages.PetsPage"
              Title="Pets">
     <StackLayout>
         <!-- 'Add' button at the top -->
@@ -18,20 +18,28 @@
             <!-- Template for each pet item -->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
-                        <!-- Pet name -->
+                    <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                        <!-- Pet Id -->
                         <Label Grid.Row="0" Grid.Column="0"
+                               Text="{Binding PetId}"
+                               AutomationId="PetId" />
+                        <!-- Pet name -->
+                        <Label Grid.Row="1" Grid.Column="0"
                                Text="{Binding PetName}"
                                FontAttributes="Bold"
                                AutomationId="PetName" />
                         <!-- Pet breed -->
-                        <Label Grid.Row="1" Grid.Column="0"
+                        <Label Grid.Row="2" Grid.Column="0"
                                Text="{Binding PetBreed}"
                                AutomationId="PetBreed" />
                         <!-- Pet age -->
-                        <Label Grid.Row="2" Grid.Column="0"
+                        <Label Grid.Row="3" Grid.Column="0"
                                Text="{Binding PetAge, StringFormat='Age: {0}'}"
                                AutomationId="PetAge" />
+                        <!-- Owner Id -->
+                        <Label Grid.Row="4" Grid.Column="0"
+                               Text="{Binding OwnerId}"
+                               AutomationId="OwnerId" />
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenPetDetailsCommand, Source={x:Reference PetsList}}"
                                                   CommandParameter="{Binding PetId}"/>

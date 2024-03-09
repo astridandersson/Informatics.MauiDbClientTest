@@ -23,6 +23,60 @@ namespace Informatics.MauiDbClientTest.ViewModel
                 OnPropertyChanged(nameof(Owner));
             }
         }
+
+        public string OwnerId { get; set; }
+
+        public string OwnerName
+        {
+            get => Owner.OwnerName;
+            set
+            {
+                if (Owner.OwnerName != value)
+                {
+                    Owner.OwnerName = value;
+                    OnPropertyChanged(nameof(OwnerName));
+                }
+            }
+        }
+
+        public string OwnerPhoneNumber
+        {
+            get => Owner.OwnerPhoneNumber;
+            set
+            {
+                if (Owner.OwnerPhoneNumber != value)
+                {
+                    Owner.OwnerPhoneNumber = value;
+                    OnPropertyChanged(nameof(OwnerPhoneNumber));
+                }
+            }
+        }
+
+        public string OwnerEmail
+        {
+            get => Owner.OwnerEmail;
+            set
+            {
+                if (Owner.OwnerEmail != value)
+                {
+                    Owner.OwnerEmail = value;
+                    OnPropertyChanged(nameof(OwnerEmail));
+                }
+            }
+        }
+
+        public string OwnerAddress
+        {
+            get => Owner.OwnerAddress;
+            set
+            {
+                if (Owner.OwnerAddress != value)
+                {
+                    Owner.OwnerAddress = value;
+                    OnPropertyChanged(nameof(OwnerAddress));
+                }
+            }
+        }
         public ICommand SaveOwnerCommand { get; private set; }
         public ICommand DeleteOwnerCommand { get; private set; }
 
@@ -55,10 +109,6 @@ namespace Informatics.MauiDbClientTest.ViewModel
             Shell.Current.GoToAsync(route);
         }
 
-        // public async Task LoadOwnerAsync(string ownerId)
-        // {
-        // Owner = await _ownerService.GetOwnerAsync(ownerId);
-        // }
 
         public async Task LoadOwnerAsync(string ownerId)
         {

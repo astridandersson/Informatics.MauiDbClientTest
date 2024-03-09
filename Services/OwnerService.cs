@@ -22,7 +22,7 @@ public class OwnerService : IOwnerService
 
     // }
 
-public async Task<Owner> SaveOwnerAsync(Owner owner)
+/* public async Task<Owner> SaveOwnerAsync(Owner owner)
 {
 // Set the DepartmentName property to the Department.Name value
 // pet.OwnerId = pet.Owner.OwnerId;
@@ -41,7 +41,15 @@ _context.Entry(owner).State = EntityState.Modified;
 //}
 await _context.SaveChangesAsync();
 return owner ;
-}
+} */
+
+public async Task<Owner> SaveOwnerAsync(Owner owner)
+    {
+    _context.Owners.Add(owner);
+    await _context.SaveChangesAsync();
+    return owner;
+
+    }
 
     public async Task<Owner> DeleteOwnerAsync(string ownerId)
     {

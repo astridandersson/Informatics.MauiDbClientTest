@@ -17,7 +17,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         // added readonly
 
-        private  IOwnerService _ownerService;
+        private IOwnerService _ownerService;
         private ObservableCollection<Owner> _owners;
 
         public Pet Pet
@@ -56,14 +56,14 @@ namespace Informatics.MauiDbClientTest.ViewModel
         public async Task LoadPetAsync(string petId)
         {
             Pet = await _petService.GetPetAsync(petId);
-            
+
             if (Pet == null)
             {
                 Pet = new Pet();
                 Pet.PetId = petId;
             }
         }
-        
+
 
         private async void SavePet()
         {
@@ -71,7 +71,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
             Shell.Current.GoToAsync("..");
 
         }
-        
+
 
 
         private async void DeletePet()
@@ -81,10 +81,10 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
 
         private void OpenPetDetails(string petId)
-{
-var route = $"{nameof(PetsDetailsPage)}?petId={petId}";
-Shell.Current.GoToAsync(route);
-}
+        {
+            var route = $"{nameof(PetsDetailsPage)}?petId={petId}";
+            Shell.Current.GoToAsync(route);
+        }
 
         public async void LoadOwners()
         {

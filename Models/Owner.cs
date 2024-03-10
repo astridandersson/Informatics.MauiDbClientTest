@@ -19,7 +19,7 @@ public class Owner
     [MaxLength(40)]
     public string OwnerPhoneNumber { get; set; }
   
-     [Column("OwnerEmail")]
+    [Column("OwnerEmail")]
     [MaxLength(40)]
      public string OwnerEmail { get; set; }
 

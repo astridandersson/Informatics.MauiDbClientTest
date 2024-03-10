@@ -10,7 +10,7 @@
                     <Label Text="Id:" FontAttributes="Bold"/>
                     <Entry Text="{Binding Owner.OwnerId, Mode=TwoWay}" Placeholder="Owner Id"/>
                     <Label Text="Name:" FontAttributes="Bold"/>
-                    
+            
                     <Entry Text="{Binding Owner.OwnerName, Mode=TwoWay}" Placeholder="Owner Name"/>
                     <Label Text="Phone Number:" FontAttributes="Bold"/>
                     <Entry Text="{Binding Owner.OwnerPhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"/>

@@ -65,18 +65,18 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
         
 
-        private async void SavePet()
+        private  void SavePet()
         {
-            await _petService.SavePetAsync(Pet);
-            Shell.Current.GoToAsync("..");
+            _petService.SavePetAsync(Pet);
+             Shell.Current.GoToAsync("..");
 
         }
         
 
 
-        private async void DeletePet()
+        private  void DeletePet()
         {
-            await _petService.DeletePetAsync(Pet.PetId);
+             _petService.DeletePetAsync(Pet.PetId);
             Shell.Current.GoToAsync("..");
         }
 

@@ -19,7 +19,7 @@
                     <Entry Text="{Binding Pet.PetAge, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Pet Age"/>
                     <Label Text="Owner:" FontAttributes="Bold"/>
                     <!-- Assuming you have a ViewModel property for the selected owner -->
-                     <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" IsReadOnly="True"/> 
+                    <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" IsReadOnly="False"/> 
 
                    <!-- <Entry Text="{Binding Pet.Owner.OwnerId, Mode=OneWay}" Placeholder="Owner Id"/> -->
 

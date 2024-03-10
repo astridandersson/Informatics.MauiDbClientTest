@@ -54,15 +54,22 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
 
         public async Task LoadPetAsync(string petId)
+{
+    if (string.IsNullOrWhiteSpace(petId))
+    {
+        Pet = new Pet(); // Initialize a new pet for adding
+    }
+    else
+    {
+        Pet = await _petService.GetPetAsync(petId); // Load existing pet for editing
+        if (Pet == null)
         {
-            Pet = await _petService.GetPetAsync(petId);
-            
-            if (Pet == null)
-            {
-                Pet = new Pet();
-                Pet.PetId = petId;
-            }
+            Pet = new Pet();
+            Pet.PetId = petId;
         }
+    }
+}
+
         
 
         private async void SavePet()

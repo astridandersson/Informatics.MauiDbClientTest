@@ -79,6 +79,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
         public ICommand SaveOwnerCommand { get; private set; }
         public ICommand DeleteOwnerCommand { get; private set; }
+        public ICommand UpdateOwnerCommand { get; private set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public OwnerDetailsViewModel(IOwnerService ownerService)
@@ -86,6 +87,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
             _ownerService = ownerService;
             SaveOwnerCommand = new Command(SaveOwner);
             DeleteOwnerCommand = new Command(DeleteOwner);
+            UpdateOwnerCommand = new Command(UpdateOwner);
 
         }
 
@@ -93,6 +95,12 @@ namespace Informatics.MauiDbClientTest.ViewModel
         private async void SaveOwner()
         {
             await _ownerService.SaveOwnerAsync(Owner);
+            Shell.Current.GoToAsync("..");
+        }
+
+        private async void UpdateOwner()
+        {
+            await _ownerService.UpdateOwnerAsync(Owner);
             Shell.Current.GoToAsync("..");
         }
 

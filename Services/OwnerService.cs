@@ -12,7 +12,7 @@ public class OwnerService : IOwnerService
     {
         _context = context;
     }
-    
+
     // public async Task<Owner> SaveOwnerAsync(Owner owner)
     // {
     //     _context.Owners.Add(owner);
@@ -22,32 +22,33 @@ public class OwnerService : IOwnerService
 
     // }
 
-/* public async Task<Owner> SaveOwnerAsync(Owner owner)
-{
-// Set the DepartmentName property to the Department.Name value
-// pet.OwnerId = pet.Owner.OwnerId;
-// Set the Department property to null to avoid PK violation
-// pet.Owner = null;
-// if -1 then add new employee
-//if (pet.PetId == -1)
-
-// {
-// pet.PetId = _context.Pets.Max(e => e.PetId) + 1;
-// _context.Pets.Add(pet);
-// //}
-// else
-// {
-_context.Entry(owner).State = EntityState.Modified;
-//}
-await _context.SaveChangesAsync();
-return owner ;
-} */
-
-public async Task<Owner> SaveOwnerAsync(Owner owner)
+    /* public async Task<Owner> SaveOwnerAsync(Owner owner)
     {
-    _context.Owners.Add(owner);
+    // Set the DepartmentName property to the Department.Name value
+    // pet.OwnerId = pet.Owner.OwnerId;
+    // Set the Department property to null to avoid PK violation
+    // pet.Owner = null;
+    // if -1 then add new employee
+    //if (pet.PetId == -1)
+
+    // {
+    // pet.PetId = _context.Pets.Max(e => e.PetId) + 1;
+    // _context.Pets.Add(pet);
+    // //}
+    // else
+    // {
+    _context.Entry(owner).State = EntityState.Modified;
+    //}
     await _context.SaveChangesAsync();
-    return owner;
+    return owner ;
+    } */
+
+
+    public async Task<Owner> SaveOwnerAsync(Owner owner)
+    {
+        _context.Owners.Add(owner);
+        await _context.SaveChangesAsync();
+        return owner;
 
     }
 
@@ -62,13 +63,13 @@ public async Task<Owner> SaveOwnerAsync(Owner owner)
         await _context.SaveChangesAsync();
         return owner;
     }
-    
+
     public async Task<Owner> GetOwnerAsync(string ownerId)
     {
         return await _context.Owners.FindAsync(ownerId);
 
     }
-    
+
     public async Task<IEnumerable<Owner>> GetOwnersAsync()
     {
         return await _context.Owners.ToListAsync();

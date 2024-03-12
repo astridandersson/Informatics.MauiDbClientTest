@@ -26,7 +26,7 @@
                         <CollectionView x:Name="OwnerSelector"
                         ItemsSource="{Binding Owners}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding Pet.Owner, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedOwner, Mode=TwoWay}"
                         HeightRequest="150">
                         <CollectionView.ItemTemplate>
                         <DataTemplate>

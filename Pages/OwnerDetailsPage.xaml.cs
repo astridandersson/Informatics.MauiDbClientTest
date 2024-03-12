@@ -29,4 +29,5 @@ public partial class OwnerDetailsPage : ContentPage
     {
         (BindingContext as OwnerDetailsViewModel)?.LoadOwnerAsync(_ownerId);
     }
+    
 }

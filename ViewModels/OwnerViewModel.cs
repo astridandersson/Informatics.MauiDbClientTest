@@ -48,8 +48,3 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
     }
 }
-
-
-
-
-

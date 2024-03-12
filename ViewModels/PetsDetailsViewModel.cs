@@ -37,7 +37,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
                     _selectedOwner = value;
                     OnPropertyChanged(nameof(SelectedOwner));
 
-                    if(Pet != null && value != null)
+                    if (Pet != null && value != null)
                     {
                         Pet.Owner = value;
                         OwnerId = value.OwnerId;
@@ -122,6 +122,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         public ICommand SavePetCommand { get; private set; }
         public ICommand DeletePetCommand { get; private set; }
+        public ICommand UpdatePetCommand { get; private set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public PetsDetailsViewModel(IPetService petService, IOwnerService ownerService)
@@ -132,6 +133,16 @@ namespace Informatics.MauiDbClientTest.ViewModel
             _owners = new ObservableCollection<Owner>();
             SavePetCommand = new Command(SavePet);
             DeletePetCommand = new Command(DeletePet);
+            UpdatePetCommand = new Command(async () => UpdatePet());
+        }
+
+        private async Task UpdatePet()
+        {
+            if (!string.IsNullOrEmpty(Pet.PetId))
+            {
+                await _petService.UpdatePetAsync(Pet);
+                Shell.Current.GoToAsync("..");
+            }
         }
 
         public async Task LoadPetAsync(string petId)

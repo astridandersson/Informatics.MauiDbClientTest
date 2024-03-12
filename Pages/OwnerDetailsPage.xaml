@@ -22,8 +22,9 @@
                         
                 </VerticalStackLayout>
             </Frame>
-            <Button Text="Save Changes" Command="{Binding SaveOwnerCommand}" CornerRadius="5" />
-            <Button Text="Delete" Command="{Binding DeleteOwnerCommand}" CornerRadius="5" />
+            <Button Text="Add Owner" Command="{Binding SaveOwnerCommand}" CornerRadius="5" />
+            <Button Text="Update Owner Data" Command="{Binding UpdateOwnerCommand}" CornerRadius="5" />
+            <Button Text="Delete Owner" Command="{Binding DeleteOwnerCommand}" CornerRadius="5" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -41,8 +41,9 @@
                   <!--  <Button Text="Select Owner" Command="{Binding SelectOwnerCommand}" CornerRadius="5"/> -->
                 </VerticalStackLayout>
             </Frame>
-            <Button Text="Save Changes" Command="{Binding SavePetCommand}" CornerRadius="5" />
-            <Button Text="Delete" Command="{Binding DeletePetCommand}" CornerRadius="5" />
+            <Button Text="Add Pet" Command="{Binding SavePetCommand}" CornerRadius="5" />
+            <Button Text="Update Pet Data" Command="{Binding UpdatePetCommand}" CornerRadius="5" />
+            <Button Text="Remove Pet" Command="{Binding DeletePetCommand}" CornerRadius="5" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

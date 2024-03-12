@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Informatics.MauiDbClientTest.Pages;
 
-
 namespace Informatics.MauiDbClientTest.ViewModel
 {
     public class PetsDetailsViewModel : INotifyPropertyChanged
@@ -19,6 +18,35 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         private IOwnerService _ownerService;
         private ObservableCollection<Owner> _owners;
+
+        private Owner _selectedOwner;
+
+        private string _petId;
+        private string _petName;
+        private string _petBreed;
+        private int _petAge;
+        private string _ownerId;
+
+        public Owner SelectedOwner
+        {
+            get => _selectedOwner;
+            set
+            {
+                if (_selectedOwner != value)
+                {
+                    _selectedOwner = value;
+                    OnPropertyChanged(nameof(SelectedOwner));
+
+                    if(Pet != null && value != null)
+                    {
+                        Pet.Owner = value;
+                        OwnerId = value.OwnerId;
+                    }
+
+                    OnPropertyChanged(nameof(Pet));
+                }
+            }
+        }
 
         public Pet Pet
         {
@@ -40,12 +68,65 @@ namespace Informatics.MauiDbClientTest.ViewModel
             }
         }
 
+        public string PetName
+        {
+            get => Pet.PetName;
+            set
+            {
+                if (Pet.PetName != value)
+                {
+                    Pet.PetName = value;
+                    OnPropertyChanged(nameof(PetName));
+                }
+            }
+        }
+
+        public string PetBreed
+        {
+            get => Pet.PetBreed;
+            set
+            {
+                if (Pet.PetBreed != value)
+                {
+                    Pet.PetBreed = value;
+                    OnPropertyChanged(nameof(PetBreed));
+                }
+            }
+        }
+
+        public int PetAge
+        {
+            get => Pet.PetAge;
+            set
+            {
+                if (Pet.PetAge != value)
+                {
+                    Pet.PetAge = value;
+                    OnPropertyChanged(nameof(PetAge));
+                }
+            }
+        }
+
+        public string OwnerId
+        {
+            get => Pet.Owner.OwnerId;
+            set
+            {
+                if (Pet.Owner.OwnerId != value)
+                {
+                    Pet.Owner.OwnerId = value;
+                    OnPropertyChanged(nameof(OwnerId));
+                }
+            }
+        }
+
         public ICommand SavePetCommand { get; private set; }
         public ICommand DeletePetCommand { get; private set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public PetsDetailsViewModel(IPetService petService, IOwnerService ownerService)
         {
+            _pet = new Pet();
             _petService = petService;
             _ownerService = ownerService;
             _owners = new ObservableCollection<Owner>();
@@ -67,17 +148,21 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         private async void SavePet()
         {
-            await _petService.SavePetAsync(Pet);
-            Shell.Current.GoToAsync("..");
+            if (!string.IsNullOrEmpty(Pet.PetId))
+            {
+                await _petService.SavePetAsync(Pet);
 
+            }
+            Shell.Current.GoToAsync("..");
         }
+
 
 
 
         private async void DeletePet()
         {
             await _petService.DeletePetAsync(Pet.PetId);
-            Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..");
         }
 
         private void OpenPetDetails(string petId)
@@ -96,9 +181,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
     }
 }
-
-
-
-

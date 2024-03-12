@@ -98,10 +98,29 @@ namespace Informatics.MauiDbClientTest.ViewModel
             Shell.Current.GoToAsync("..");
         }
 
-        private async void UpdateOwner()
+        /* private async void UpdateOwner()
         {
             await _ownerService.UpdateOwnerAsync(Owner);
             Shell.Current.GoToAsync("..");
+        } */
+
+        public Action<string, string, string> DisplayAlertAction { get; set; }
+        private async void UpdateOwner()
+        {
+            try
+            {
+                // Attempt to update the owner...
+                await _ownerService.UpdateOwnerAsync(Owner);
+                Shell.Current.GoToAsync("..");
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                DisplayAlertAction?.Invoke("Update Error", "Owner ID value is essential for maintaining consistent information in the system and should not be changed.", "OK");
+            }
+            catch (Exception ex)
+            {
+                DisplayAlertAction?.Invoke("Error", "An unexpected error occurred.", "OK");
+            }
         }
 
 

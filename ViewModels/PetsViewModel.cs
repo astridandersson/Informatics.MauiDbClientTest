@@ -16,6 +16,8 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         public ICommand OpenPetDetailsCommand { get; private set; }
 
+       
+
         public ICommand RefreshCommand { get; private set; }
 
 

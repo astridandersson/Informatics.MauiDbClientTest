@@ -10,6 +10,7 @@ public interface IOwnerService
     Task<Owner> SaveOwnerAsync(Owner owner);
     Task<Owner> UpdateOwnerAsync(Owner owner);
     Task<Owner> DeleteOwnerAsync(string OwnerId);
+    void DetachEntity(Owner owner); // Add this line
 
 
 

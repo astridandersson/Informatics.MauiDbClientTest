@@ -6,6 +6,7 @@ using Informatics.MauiDbClientTest.Contexts;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Informatics.MauiDbClientTest.Pages;
+using AVFoundation;
 
 namespace Informatics.MauiDbClientTest.ViewModel
 {
@@ -138,11 +139,16 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         private async Task UpdatePet()
         {
-            if (!string.IsNullOrEmpty(Pet.PetId))
+            if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
             {
                 await _petService.UpdatePetAsync(Pet);
-                Shell.Current.GoToAsync("..");
+            } else {
+                await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
+                
+
             }
+           await Shell.Current.GoToAsync("..");
+
         }
 
         public async Task LoadPetAsync(string petId)
@@ -159,13 +165,17 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         private async void SavePet()
         {
-            if (!string.IsNullOrEmpty(Pet.PetId))
+            if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
             {
                 await _petService.SavePetAsync(Pet);
+
+            } else {
+            await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
 
             }
             Shell.Current.GoToAsync("..");
         }
+    
 
 
 

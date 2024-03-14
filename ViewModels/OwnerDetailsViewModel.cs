@@ -11,6 +11,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
     public class OwnerDetailsViewModel : INotifyPropertyChanged
     {
         private readonly IOwnerService _ownerService;
+
         private Owner _owner;
         public Owner Owner
         {
@@ -98,6 +99,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
             Shell.Current.GoToAsync("..");
         } */
 
+
         private async void SaveOwner()
         {
             try
@@ -146,12 +148,22 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
 
 
+private async void DeleteOwner()
+{
+    try {
+        await _ownerService.DeleteOwnerAsync(Owner.OwnerId);
+         Shell.Current.GoToAsync("..");
+    }
+    catch (Exception ex)
+    {
+        DisplayAlertAction?.Invoke("Error", "An unexpected error occurred make sure there are no pets connected to the selected owner.", "OK");
+    }
 
-        private async void DeleteOwner()
-        {
-            await _ownerService.DeleteOwnerAsync(Owner.OwnerId);
-            Shell.Current.GoToAsync("..");
-        }
+
+}
+
+
+
 
         private void OpenOwnerDetails(string ownerId)
         {

@@ -6,7 +6,10 @@ using Informatics.MauiDbClientTest.Contexts;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Informatics.MauiDbClientTest.Pages;
-using AVFoundation;
+using System.Linq.Expressions;
+
+using Microsoft.Data.SqlClient; // This is for SqlException
+using Microsoft.EntityFrameworkCore; 
 
 namespace Informatics.MauiDbClientTest.ViewModel
 {
@@ -21,6 +24,8 @@ namespace Informatics.MauiDbClientTest.ViewModel
         private ObservableCollection<Owner> _owners;
 
         private Owner _selectedOwner;
+
+        private UniversityContext _context;
 
         private string _petId;
         private string _petName;
@@ -139,17 +144,28 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         private async Task UpdatePet()
         {
-            if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
-            {
-                await _petService.UpdatePetAsync(Pet);
-            } else {
-                await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
-                
 
-            }
-           await Shell.Current.GoToAsync("..");
+    
+                if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
+                {
+                    await _petService.UpdatePetAsync(Pet);
+                    await Shell.Current.GoToAsync("..");
 
+
+                } else {
+                    await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
+                    await Shell.Current.GoToAsync("..");
+
+    
+                } 
+          
+           
+        
         }
+
+
+
+
 
         public async Task LoadPetAsync(string petId)
         {
@@ -163,20 +179,30 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
 
 
-        private async void SavePet()
-        {
-            if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
-            {
-                await _petService.SavePetAsync(Pet);
+        // private async void SavePet()
+        // {
+        //     if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2)
+        //     {
+        //         await _petService.SavePetAsync(Pet);
 
-            } else {
-            await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
+        //     } else {
+        //     await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty or pet age is less than 2.", "OK");
 
-            }
-            Shell.Current.GoToAsync("..");
-        }
-    
-
+        //     }
+        //     Shell.Current.GoToAsync("..");
+        // }
+    private async void SavePet()
+{
+    if (!string.IsNullOrEmpty(Pet.PetId) && Pet.PetAge > 2 && Pet.PetId.StartsWith("P"))
+    {
+        await _petService.SavePetAsync(Pet);
+        Shell.Current.GoToAsync("..");
+    }
+    else
+    {
+        await Application.Current.MainPage.DisplayAlert("Error", "PetId is empty, pet age is less than or equal to 2, or PetId doesn't start with 'P'.", "OK");
+    }
+}
 
 
 

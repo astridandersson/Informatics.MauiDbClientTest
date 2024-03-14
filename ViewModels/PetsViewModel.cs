@@ -29,11 +29,17 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         }
 
-        private void OpenAddPet()
+        // private void OpenAddPet()
+        // {
+        //     var route = $"{nameof(PetsDetailsPage)}";
+        //     Shell.Current.GoToAsync(route);
+        // }
+      
+    private void OpenAddPet()
         {
-            var route = $"{nameof(PetsDetailsPage)}";
-            Shell.Current.GoToAsync(route);
+            OpenPetDetails(string.Empty);
         }
+
         private void OpenPetDetails(string PetId)
         {
             var route = $"{nameof(PetsDetailsPage)}?petId={PetId}";

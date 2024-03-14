@@ -91,20 +91,42 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
         }
 
-
-        private async void SaveOwner()
+        public Action<string, string, string> DisplayAlertAction { get; set; }
+        /* private async void SaveOwner()
         {
             await _ownerService.SaveOwnerAsync(Owner);
             Shell.Current.GoToAsync("..");
-        }
-
-        /* private async void UpdateOwner()
-        {
-            await _ownerService.UpdateOwnerAsync(Owner);
-            Shell.Current.GoToAsync("..");
         } */
 
-        public Action<string, string, string> DisplayAlertAction { get; set; }
+        private async void SaveOwner()
+        {
+            try
+            {
+                await _ownerService.SaveOwnerAsync(Owner);
+                Shell.Current.GoToAsync("..");
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Check if the exception message contains the specific detail about duplicate key
+                if (ex.Message.Contains("another instance with the same key value for {'OwnerId'}"))
+                {
+                    DisplayAlertAction?.Invoke("Save Error", "An owner with the same ID already exists. Please use a unique ID.", "OK");
+                    _ownerService.DetachEntity(Owner);
+                }
+                else
+                {
+                    DisplayAlertAction?.Invoke("Error", "An unexpected error occurred while saving the owner.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayAlertAction?.Invoke("Error", "An unexpected error occurred.", "OK");
+            }
+        }
+
+
+
+
         private async void UpdateOwner()
         {
             try
@@ -115,13 +137,14 @@ namespace Informatics.MauiDbClientTest.ViewModel
             }
             catch (System.InvalidOperationException ex)
             {
-                DisplayAlertAction?.Invoke("Update Error", "Owner ID value is essential for maintaining consistent information in the system and should not be changed.", "OK");
+                DisplayAlertAction?.Invoke("Update Error", "Owner ID value is essential for maintaining consistent information in the system and should not be changed. Try adding a new Owner instead.", "OK");
             }
             catch (Exception ex)
             {
                 DisplayAlertAction?.Invoke("Error", "An unexpected error occurred.", "OK");
             }
         }
+
 
 
         private async void DeleteOwner()

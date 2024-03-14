@@ -140,6 +140,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
             SavePetCommand = new Command(SavePet);
             DeletePetCommand = new Command(DeletePet);
             UpdatePetCommand = new Command(async () => UpdatePet());
+            
         }
 
         private async Task UpdatePet()
@@ -150,6 +151,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
                 {
                     await _petService.UpdatePetAsync(Pet);
                     await Shell.Current.GoToAsync("..");
+    
 
 
                 } else {
@@ -158,7 +160,8 @@ namespace Informatics.MauiDbClientTest.ViewModel
 
     
                 } 
-          
+                              await Shell.Current.GoToAsync("..");
+
            
         
         }
@@ -222,6 +225,7 @@ namespace Informatics.MauiDbClientTest.ViewModel
         {
             var owners = await _ownerService.GetOwnersAsync();
             Owners = new ObservableCollection<Owner>(owners);
+            
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

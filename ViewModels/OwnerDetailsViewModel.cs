@@ -2,6 +2,9 @@
 using System.Windows.Input;
 using Informatics.MauiDbClientTest.Models;
 using Informatics.MauiDbClientTest.Pages;
+using Microsoft.Data.SqlClient; // This is for SqlException
+using Microsoft.EntityFrameworkCore; // This is for DbUpdateException
+
 using Informatics.MauiDbClientTest.Services;
 
 
@@ -104,8 +107,12 @@ namespace Informatics.MauiDbClientTest.ViewModel
         {
             try
             {
+                if (Owner.OwnerId.StartsWith("O")) {
                 await _ownerService.SaveOwnerAsync(Owner);
                 Shell.Current.GoToAsync("..");
+                } else {
+                    DisplayAlertAction?.Invoke("Save Error", "Owner ID must start with the letter 'O'.", "OK");
+                }
             }
             catch (InvalidOperationException ex)
             {
@@ -144,6 +151,8 @@ namespace Informatics.MauiDbClientTest.ViewModel
             catch (Exception ex)
             {
                 DisplayAlertAction?.Invoke("Error", "An unexpected error occurred.", "OK");
+                await Shell.Current.GoToAsync("..");
+
             }
         }
 
@@ -154,11 +163,15 @@ private async void DeleteOwner()
         await _ownerService.DeleteOwnerAsync(Owner.OwnerId);
          Shell.Current.GoToAsync("..");
     }
-    catch (Exception ex)
-    {
-        DisplayAlertAction?.Invoke("Error", "An unexpected error occurred make sure there are no pets connected to the selected owner.", "OK");
-    }
+    
+     catch  (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547) {
+     await Application.Current.MainPage.DisplayAlert("Error", "Cannot delete owner because it is associated with one or more pets.", "OK");
 
+    } catch  
+    (Exception ex) {
+        await Application.Current.MainPage.DisplayAlert("Error", "An unexpected error occurred.", "OK");
+    }
+ 
 
 }
 

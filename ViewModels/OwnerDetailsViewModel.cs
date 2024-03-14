@@ -90,16 +90,16 @@ namespace Informatics.MauiDbClientTest.ViewModel
         }
 
 
-        private async void SaveOwner()
+        private  void SaveOwner()
         {
-            await _ownerService.SaveOwnerAsync(Owner);
+             _ownerService.SaveOwnerAsync(Owner);
             Shell.Current.GoToAsync("..");
         }
 
 
-        private async void DeleteOwner()
+        private  void DeleteOwner()
         {
-            await _ownerService.DeleteOwnerAsync(Owner.OwnerId);
+             _ownerService.DeleteOwnerAsync(Owner.OwnerId);
             Shell.Current.GoToAsync("..");
         }
 

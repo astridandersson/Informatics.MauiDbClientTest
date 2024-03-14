@@ -1,4 +1,6 @@
-﻿using Informatics.MauiDbClientTest.Contexts;
+﻿
+
+using Informatics.MauiDbClientTest.Contexts;
 using Informatics.MauiDbClientTest.Models;
 using Informatics.MauiDbClientTest.Pages;
 using Microsoft.EntityFrameworkCore;
@@ -57,13 +59,29 @@ public class PetService : IPetService
         return await _context.Pets.ToListAsync();
     }
     
-    public async Task<Pet> UpdatePetAsync(Pet pet)
-    {
-        _context.Entry(pet).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return pet;
-    }
+    // public async Task<Pet> UpdatePetAsync(Pet pet)
+    // {
+    //     _context.Entry(pet).State = EntityState.Modified;
+    //     await _context.SaveChangesAsync();
+    //     return pet;
+    // }
     
+// public async Task<Pet> SavePetAsync(Pet pet)
+// {
+    
+// // Set the DepartmentName property to the Department.Name value
+// pet.OwnerId = pet.Owner.OwnerId;
+// // Set the Department property to null to avoid PK violation
+// pet.Owner = null;
+// // if -1 then add new employee
+
+
+// _context.Entry(pet).State = EntityState.Modified;
+
+// await _context.SaveChangesAsync();
+// return pet;
+// }
+// }
 public async Task<Pet> SavePetAsync(Pet pet)
 {
 // Set the DepartmentName property to the Department.Name value
@@ -71,14 +89,28 @@ pet.OwnerId = pet.Owner.OwnerId;
 // Set the Department property to null to avoid PK violation
 pet.Owner = null;
 // if -1 then add new employee
+if (pet.PetId == null)
+{
+_context.Pets.Add(pet);
 
-
+}
+else
+{
 _context.Entry(pet).State = EntityState.Modified;
+}
+await _context.SaveChangesAsync();
+return pet;
+}
 
+
+public async Task<Pet> UpdatePetAsync(Pet pet)
+{
+_context.Entry(pet).State = EntityState.Modified;
 await _context.SaveChangesAsync();
 return pet;
 }
 }
+
 
 
 

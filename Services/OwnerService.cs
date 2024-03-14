@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Informatics.MauiDbClientTest.Services;
 
 public class OwnerService : IOwnerService
+
 {
     private UniversityContext _context;
     public OwnerService(UniversityContext context)

@@ -24,6 +24,8 @@ public partial class OwnerDetailsPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+
+        viewModel.DisplayAlertAction = (title, message, cancel) => DisplayAlert(title, message, cancel);
     }
     private void LoadOwner()
     {
